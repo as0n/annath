@@ -19,7 +19,7 @@ class NeuralNetwork(object):
 		self.inputs.append(inputs)
 		self.outputs.append(outputs)
 
-	def think(self, inputs):
+	def process(self, inputs):
 		cur = inputs
 		states = [cur]
 		for syn in self.synapses:
@@ -31,7 +31,7 @@ class NeuralNetwork(object):
 		X = np.array(self.inputs)
 		for i in range(n):
 			# Evaluation
-			states = self.think(X)
+			states = self.process(X)
 
 			# Corrections
 			last_state = states.pop()
@@ -48,9 +48,12 @@ class NeuralNetwork(object):
 					prev_delta = error * utils.sigmoid(state, True)
 
 	def error(self):
-		states = self.think(np.array(self.inputs))
+		states = self.process(np.array(self.inputs))
 		error = np.array(self.outputs) - states[-1]
 		return np.mean(np.abs(error))
 
 	def apply(self, *inputs):
-		return self.think(inputs)[-1]
+		return self.process(inputs)[-1]
+
+	def apply_multiple(self, inputs):
+		return [self.apply(*input) for input in inputs]
