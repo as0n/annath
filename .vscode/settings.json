@@ -1,0 +1,9 @@
+{
+    "editor.formatOnSave": false,
+    "editor.tabSize": 4,
+
+    "files.insertFinalNewline": true,
+    "files.trimTrailingWhitespace": true,
+
+    "python.linting.flake8Enabled": true,
+}
