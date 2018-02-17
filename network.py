@@ -35,6 +35,3 @@ class Network(object):
         """
         *_, (_, _, output) = self.feed_forward(input)
         return output
-
-    def train(self, input, expected_output):
-        pass

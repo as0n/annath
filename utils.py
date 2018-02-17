@@ -1,10 +1,16 @@
 import numpy as np
 
 
-# Sigmoid function : R -> [0-1]
-def sigmoid(x, deriv=False):
-    return x*(1-x) if deriv else 1/(1+np.exp(-x))
+def sigmoid(x):
+    return 1/(1+np.exp(-x))
+
+
+def sigmoid_deriv(x):
+    return x * (1 - x)
 
 
 def random_matrix(*dimensions, start=-1, stop=1):
+    if len(dimensions) == 1:
+        dimensions = dimensions + (1,)
+
     return (np.random.rand(*dimensions) * (stop - start)) + start

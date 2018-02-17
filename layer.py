@@ -17,3 +17,6 @@ class Layer(object):
 
     def feed_forward(self, input):
         return sigmoid(self.weights @ input + self.bias)
+
+    def back_propagate(self, errors):
+        return self.weights.transpose() @ errors
