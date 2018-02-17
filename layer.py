@@ -13,4 +13,7 @@ class Layer(object):
         return '<Layer {}:{}>'.format(self.input_size, self.neurons)
 
     def __call__(self, input):
+        return self.feed_forward(input)
+
+    def feed_forward(self, input):
         return sigmoid(self.weights @ input + self.bias)

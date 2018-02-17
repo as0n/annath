@@ -17,11 +17,25 @@ class Network(object):
             self.layer_sizes[-1]
         )
 
-    def __call__(self, input):
-        for layer in self.layers:
-            input = layer(input)
+    def feed_forward(self, input):
+        """
+        Passes the input through each layer, keeps track of the state.
+        """
+        # Transpose input if it's in the wrong shape
+        if input.shape[1] != 1:
+            input = input.transpose()
 
-        return input
+        for layer in self.layers:
+            output = layer(input)
+            yield (layer, input, output)
+            input = output
+
+    def __call__(self, input):
+        """
+        Just returns the last output.
+        """
+        *_, (_, _, output) = self.feed_forward(input)
+        return output
 
     def train(self, input, expected_output):
         pass
