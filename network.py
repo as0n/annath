@@ -12,9 +12,8 @@ class Network(object):
             input_size = layer_size
 
     def __repr__(self):
-        return '<NeuralNetwork {}:{}>'.format(
-            self.layer_sizes[0],
-            self.layer_sizes[-1]
+        return '<NeuralNetwork {}>'.format(
+            ':'.join([str(s) for s in self.layer_sizes])
         )
 
     def feed_forward(self, input):
